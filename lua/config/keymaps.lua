@@ -60,6 +60,7 @@ local nmappings = {
 	{ from = "<c-o>",         to = "<C-w>o", },
 	{ from = "qq",            to = ":q!<CR>", },
 	{ from = "s",             to = "<nop>", },
+	{ from = "sa",            to = ":saveas ", },
 	{ from = "sk",            to = ":set nosplitbelow<CR>:split<CR>:set splitbelow<CR>", },
 	{ from = "sj",            to = ":set splitbelow<CR>:split<CR>", },
 	{ from = "sh",            to = ":set nosplitright<CR>:vsplit<CR>:set splitright<CR>", },
@@ -80,6 +81,7 @@ local nmappings = {
 	{ from = "tK",            to = ":tab split<CR>", },
 	{ from = "th",            to = ":-tabnext<CR>", },
 	{ from = "tl",            to = ":+tabnext<CR>", },
+	{ from = "tc",            to = ":tabclose<CR>", },
 	{ from = "tmh",           to = ":-tabmove<CR>", },
 	{ from = "tml",           to = ":+tabmove<CR>", },
 

@@ -5,9 +5,9 @@ local M = {
 
 function M.config()
 	local execs = {
-		{ nil, "<c-1>",     "Horizontal Terminal", "horizontal", 0.3 },
-		{ nil, "<LEADER>2", "Vertical Terminal",   "vertical",   0.4 },
-		{ nil, "<LEADER>3", "Float Terminal",      "float",      nil },
+		{ nil, "<LEADER>eh", "Horizontal Terminal", "horizontal", 0.3 },
+		{ nil, "<LEADER>ev", "Vertical Terminal",   "vertical",   0.4 },
+		{ nil, "<LEADER>ef", "Float Terminal",      "float",      nil },
 	}
 
 	local function get_buf_size()
@@ -89,12 +89,12 @@ function M.config()
 				background = "Normal",
 			},
 		},
-		winbar = {
-			enabled = true,
-			name_formatter = function(term) --  term: Terminal
-				return term.count
-			end,
-		},
+		--winbar = {
+		--	enabled = true,
+		--	name_formatter = function(term) --  term: Terminal
+		--		return term.count
+		--	end,
+		--},
 	}
 	vim.cmd [[
   augroup terminal_setup | au!
