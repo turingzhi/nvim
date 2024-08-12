@@ -61,6 +61,7 @@ M.config = {
 				'dockerls',
 				'ansiblels',
 				'terraformls',
+				'markdown',
 				'texlab',
 				'pyright',
 				'yamlls',
@@ -110,9 +111,12 @@ M.config = {
 			require("config.lsp.json").setup(lspconfig, lsp)
 			require("config.lsp.flutter").setup(lsp)
 			require("config.lsp.html").setup(lspconfig, lsp)
+			require 'lspconfig'.clangd.setup {}
+
 
 			require 'lspconfig'.html.setup {}
 			require 'lspconfig'.pyright.setup {}
+			require 'lspconfig'.marksman.setup {}
 
 			require 'lspconfig'.tsserver.setup {
 				init_options = {
@@ -215,6 +219,7 @@ M.config = {
 					"json",
 					"less",
 					"markdown",
+					"cpp",
 					"scss",
 					"typescript",
 					"typescriptreact",
@@ -343,7 +348,7 @@ F.configureKeybinds = function()
 		callback = function(event)
 			local opts = { buffer = event.buf, noremap = true, nowait = true }
 
-			vim.keymap.set('n', '<leader>H', show_documentation, opts)
+			vim.keymap.set('n', 'sd', show_documentation, opts)
 			vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
 			vim.keymap.set('n', 'gD', ':tab sp<CR><cmd>lua vim.lsp.buf.definition()<cr>', opts)
 			vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
