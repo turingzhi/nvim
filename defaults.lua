@@ -37,8 +37,6 @@ vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.inccommand = 'split'
 vim.o.completeopt = 'longest,noinsert,menuone,noselect,preview'
 vim.o.completeopt = 'menuone,noinsert,noselect,preview'
-vim.opt.path:append("**")
-
 -- vim.o.lazyredraw = true
 vim.o.visualbell = true
 vim.o.colorcolumn = '100'
@@ -60,13 +58,16 @@ endif
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.md", command = "setlocal spell", })
 vim.api.nvim_create_autocmd("BufEnter", { pattern = "*", command = "silent! lcd %:p:h", })
 -- Automatically source the current file after saving
---vim.api.nvim_create_autocmd("BufWritePost", {
---	pattern = "*.lua",
---	command = "source %",
---})
+vim.api.nvim_create_autocmd("BufWritePost", {
+	pattern = "*.lua",
+	command = "source %",
+})
 
 
 vim.cmd([[au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]])
+vim.cmd([[
+  au BufWritePost $MYVIMRC source $MYVIMRC
+]])
 
 
 vim.g.terminal_color_0  = '#000000'
