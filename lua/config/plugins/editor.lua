@@ -1,17 +1,17 @@
-vim.cmd([[
-fun! s:MakePair()
-	let line = getline('.')
-	let len = strlen(line)
-	if line[len - 1] == ";" || line[len - 1] == ","
-		normal! lx$P
-	else
-		normal! lx$p
-	endif
-endfun
-inoremap <c-u> <ESC>:call <SID>MakePair()<CR>
-]])
-local ctrlu = require("plugin.ctrlu").ctrlu
-vim.keymap.set("i", "<C-u>", ctrlu, { silent = true })
+-- vim.cmd([[
+-- fun! s:MakePair()
+-- 	let line = getline('.')
+-- 	let len = strlen(line)
+-- 	if line[len - 1] == ";" || line[len - 1] == ","
+-- 		normal! lx$P
+-- 	else
+-- 		normal! lx$p
+-- 	endif
+-- endfun
+-- inoremap <c-u> <ESC>:call <SID>MakePair()<CR>
+-- ]])
+-- local ctrlu = require("plugin.ctrlu").ctrlu
+-- vim.keymap.set("i", "<C-u>", ctrlu, { silent = true })
 
 return {
 	{
@@ -88,12 +88,12 @@ return {
 			})
 			local opts = { noremap = true, silent = true }
 			-- Normal-mode commands
-			vim.keymap.set('n', '<c-y>', ':MoveLine(1)<CR>', opts)
-			vim.keymap.set('n', '<c-l>', ':MoveLine(-1)<CR>', opts)
+			-- vim.keymap.set('n', '<c-y>', ':MoveLine(1)<CR>', opts)
+			-- vim.keymap.set('n', '<c-l>', ':MoveLine(-1)<CR>', opts)
 
 			-- Visual-mode commands
-			vim.keymap.set('v', '<c-e>', ':MoveBlock(1)<CR>', opts)
-			vim.keymap.set('v', '<c-u>', ':MoveBlock(-1)<CR>', opts)
+			-- vim.keymap.set('v', '<c-e>', ':MoveBlock(1)<CR>', opts)
+			-- vim.keymap.set('v', '<c-u>', ':MoveBlock(-1)<CR>', opts)
 		end
 	},
 	{
@@ -107,12 +107,12 @@ return {
 					timer = 200,
 				},
 			})
-			vim.keymap.set("n", "s", substitute.operator, { noremap = true })
-			--vim.keymap.set("n", "sh", function() substitute.operator({ motion = "e" }) end, { noremap = true })
-			vim.keymap.set("x", "s", require('substitute.range').visual, { noremap = true })
-			vim.keymap.set("n", "ss", substitute.line, { noremap = true })
-			vim.keymap.set("n", "sI", substitute.eol, { noremap = true })
-			vim.keymap.set("x", "s", substitute.visual, { noremap = true })
+			-- vim.keymap.set("n", "s", substitute.operator, { noremap = true })
+			-- --vim.keymap.set("n", "sh", function() substitute.operator({ motion = "e" }) end, { noremap = true })
+			-- vim.keymap.set("x", "s", require('substitute.range').visual, { noremap = true })
+			-- vim.keymap.set("n", "ss", substitute.line, { noremap = true })
+			-- vim.keymap.set("n", "sI", substitute.eol, { noremap = true })
+			-- vim.keymap.set("x", "s", substitute.visual, { noremap = true })
 		end
 	},
 	{

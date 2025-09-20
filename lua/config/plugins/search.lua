@@ -22,10 +22,13 @@ return {
 	-- },
 	{
 		"pechorin/any-jump.vim",
+		init = function()
+			-- must be set before the plugin loads!
+			vim.g.any_jump_disable_default_keybindings = true
+		end,
 		config = function()
 			vim.keymap.set("n", "m", ":AnyJump<CR>", { noremap = true })
 			vim.keymap.set("x", "m", ":AnyJumpVisual<CR>", { noremap = true })
-			vim.g.any_jump_disable_default_keybindings = true
 			vim.g.any_jump_window_width_ratio = 0.9
 			vim.g.any_jump_window_height_ratio = 0.9
 		end

@@ -5,9 +5,9 @@ vim.g.snips_author = 'Kaizhi Fan'
 vim.g.python3_host_prog = '/usr/bin/python3'
 
 vim.g.mkdp_browser = 'Safari'
-vim.g.mkdp_browserfunc = ''
 
-vim.g.mkdp_browserfunc = ''
+
+-- vim.g.mkdp_browserfunc = 'OpenMarkdownPreview'
 
 vim.g.flutter_default_device = 'macos'
 vim.g.flutter_run_args = ''

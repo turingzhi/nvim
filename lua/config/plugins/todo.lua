@@ -1,21 +1,10 @@
 todo comment
-delete buffer
-compile run
-quickfix list
-harpoon
-don't load flutter on every filetype
+	install nvim-tree.lua
+	find how to use dropbar.lua
 
 
 refine:
-telescope
-yank highlight color
-nvim-cmp more sources
-cmp icons
-smaller tabs
-startuptime
 
 convert to lua:
-rooter
 
 check-out:
-bufferline tab groups

@@ -65,6 +65,7 @@ M.config = {
 				'texlab',
 				'pyright',
 				'yamlls',
+				'jdsls',
 			})
 
 			lsp.on_attach(function(client, bufnr)
@@ -109,9 +110,10 @@ M.config = {
 
 			require("config.lsp.lua").setup(lspconfig, lsp)
 			require("config.lsp.json").setup(lspconfig, lsp)
-			require("config.lsp.flutter").setup(lsp)
+			-- require("config.lsp.flutter").setup(lsp)
 			require("config.lsp.html").setup(lspconfig, lsp)
 			require 'lspconfig'.clangd.setup {}
+			require 'lspconfig'.jdtls.setup {}
 
 
 			require 'lspconfig'.html.setup {}
@@ -247,6 +249,7 @@ M.config = {
 				},
 			})
 
+
 			local format_on_save_filetypes = {
 				dart = true,
 				json = true,
@@ -352,12 +355,13 @@ F.configureKeybinds = function()
 			vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
 			vim.keymap.set('n', 'gD', ':tab sp<CR><cmd>lua vim.lsp.buf.definition()<cr>', opts)
 			vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-			vim.keymap.set('n', 'go', vim.lsp.buf.type_definition, opts)
+			vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, opts)
 			vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-			vim.keymap.set('i', '<c-f>', vim.lsp.buf.signature_help, opts)
+			vim.keymap.set('n', 'F', '<cmd>lua vim.lsp.buf.format()<CR>', { noremap = true, silent = true })
+			-- vim.keymap.set('i', '<c-f>', vim.lsp.buf.signature_help, opts)
 			vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
 			-- vim.keymap.set({ 'n', 'x' }, '<leader>f', function() vim.lsp.buf.format({ async = true }) end, opts)
-			vim.keymap.set('n', '<leader>aw', vim.lsp.buf.code_action, opts)
+			-- vim.keymap.set('n', '<leader>aw', vim.lsp.buf.code_action, opts)
 			vim.keymap.set('n', "<leader>,", vim.lsp.buf.code_action, opts)
 			-- vim.keymap.set('x', '<leader>aw', vim.lsp.buf.range_code_action, opts)
 			-- vim.keymap.set('x', "<leader>,", vim.lsp.buf.range_code_action, opts)

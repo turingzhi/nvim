@@ -11,6 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+
 local lazy_cmd = require("lazy.view.config").commands
 local lazy_keys = {
 	{ cmd = "install", key = "i" },
@@ -26,11 +27,11 @@ for _, v in ipairs(lazy_keys) do
 	lazy_cmd[v.cmd].key = "<SPC>" .. v.key
 	lazy_cmd[v.cmd].key_plugin = "<leader>" .. v.key
 end
-vim.keymap.set("n", "<leader>pl", ":Lazy<CR>", { noremap = true })
+vim.keymap.set("n", "<leader>l", ":Lazy<CR>", { noremap = true })
 
 require("lazy").setup({
 	require("config.plugins.telescope").config,
-	require("config.plugins.fzf"),
+	-- require("config.plugins.fzf"),
 	require("config.plugins.colorscheme"),
 	require("config.plugins.notify"),
 	require("config.plugins.statusline"),
@@ -40,10 +41,11 @@ require("lazy").setup({
 	require("config.plugins.autocomplete").config,
 	require("config.plugins.debugger"),
 	require("config.plugins.lspconfig").config,
-	require("config.plugins.flutter"),
-	require("config.plugins.go"),
+	-- require("config.plugins.flutter"),
+	-- require("config.plugins.go"),
 	require("config.plugins.treesitter"),
-	require("config.plugins.joshuto"),
+	-- require("config.plugins.nvim-tree"),
+	-- require("config.plugins.joshuto"),
 	require("config.plugins.comment"),
 	require("config.plugins.surround"),
 	require("config.plugins.project"),
@@ -58,10 +60,11 @@ require("lazy").setup({
 	require("config.plugins.snippets"),
 	require("config.plugins.window-management"),
 	require("config.plugins.undo"),
-	require("config.plugins.ft"),
+	-- require("config.plugins.ft"),
 	require("config.plugins.fun"),
 	require("config.plugins.winbar"),
-	require("config.plugins.leap"),
+	require("config.plugins.flash"),
+	require("config.plugins.yazi"),
 	require("config.plugins.tex"),
 	require("config.plugins.toggleterm"),
 	{ "dstein64/vim-startuptime" },

@@ -6,7 +6,7 @@ local mode_i = { "i" }
 local mode_c = { "c" }
 local nmappings = {
 	{ from = "S",             to = ":w<CR>" },
-	{ from = "Q",             to = ":q<CR>" },
+	{ from = "Q",             to = ":q!<CR>" },
 	{ from = ";",             to = ":",                                                                   mode = mode_nv },
 	{ from = "Y",             to = "\"+y",                                                                mode = mode_v },
 	{ from = "`",             to = "~",                                                                   mode = mode_nv },
@@ -20,9 +20,9 @@ local nmappings = {
 	{ from = "J",             to = "5j",                                                                  mode = mode_nv },
 	{ from = "H",             to = "0",                                                                   mode = mode_nv },
 	{ from = "L",             to = "$",                                                                   mode = mode_nv },
-	{ from = "W",             to = "5w",                                                                  mode = mode_nv },
-	{ from = "E",             to = "5e",                                                                  mode = mode_nv },
-	{ from = "B",             to = "5b",                                                                  mode = mode_nv },
+	-- { from = "W",             to = "5w",                                                                  mode = mode_nv },
+	-- { from = "E",             to = "5e",                                                                  mode = mode_nv },
+	-- { from = "B",             to = "5b",                                                                  mode = mode_nv },
 	--	{ from = "gu",            to = "gk",                                                                  mode = mode_nv },
 	--	{ from = "ge",            to = "gj",                                                                  mode = mode_nv },
 	--	{ from = "h",             to = "e",                                                                   mode = mode_nv },
@@ -40,16 +40,21 @@ local nmappings = {
 	--	{ from = "K",             to = "I",                                                                   mode = mode_nv },
 
 	-- Useful actions
-	{ from = ",.",            to = "%",                                                                   mode = mode_nv },
-	{ from = "<c-y>",         to = "<ESC>A {}<ESC>i<CR><ESC>ko",                                          mode = mode_i },
-	{ from = "\\v",           to = "v$h", },
-	{ from = "<c-a>",         to = "<ESC>A",                                                              mode = mode_i },
+	-- { from = ",.",            to = "%",                                                                   mode = mode_nv },
+	{ from = "<c-o>",         to = "<ESC>A {}<ESC>i<CR><ESC>ko",                                          mode = mode_i },
+	-- { from = "\\v",           to = "v$h", },
+	{ from = "<c-a>",         to = "<ESC>I",                                                              mode = mode_i },
+	{ from = "<c-e>",         to = "<ESC>A",                                                              mode = mode_i },
+	{ from = "<c-f>",         to = "<Right>",                                                             mode = mode_i },
+	{ from = "<c-b>",         to = "<Left>",                                                              mode = mode_i },
 	{ from = "<c-a>",         to = "<Home>",                                                              mode = mode_c },
 	{ from = "<c-e>",         to = "<End>",                                                               mode = mode_c },
 	{ from = "<c-f>",         to = "<Right>",                                                             mode = mode_c },
 	{ from = "<c-b>",         to = "<Left>",                                                              mode = mode_c },
 	{ from = "<Esc>f",        to = "<S-Right>",                                                           mode = mode_c },
 	{ from = "<Esc>b",        to = "<S-Left>",                                                            mode = mode_c },
+	{ from = "<c-h>",         to = "<c-o>" },
+	{ from = "<c-l>",         to = "<c-i>" },
 
 	-- Window & splits
 	{ from = "<leader>w",     to = "<C-w>w", },
@@ -77,7 +82,7 @@ local nmappings = {
 	{ from = "tx",            to = ":r !figlet ", },
 
 	-- Tab management
-	{ from = "tk",            to = ":tabe<CR>", },
+	{ from = "tk",            to = ":enew<CR>", },
 	{ from = "tK",            to = ":tab split<CR>", },
 	{ from = "th",            to = ":-tabnext<CR>", },
 	{ from = "tl",            to = ":+tabnext<CR>", },
@@ -98,9 +103,14 @@ local nmappings = {
 	{ from = ",v",            to = "v%" },
 	{ from = "<leader><esc>", to = "<nop>" },
 	{ from = "<leader>sg",    to = ":%s///g<left><left><left>" },
+	{ from = "<leader>sj",    to = ":%!jq .<CR>" },
+	-- Select all
+	{ from = "<leader>a",     to = "ggVG" },
+	-- Select all and yank to system clipboard
+	{ from = "<leader>Y",     to = "ggVGy+" },
 
 	-- Joshuto
-	{ from = "R",             to = ":Joshuto<CR>" },
+	-- { from = "R",             to = ":Joshuto<CR>" },
 
 	--	{ from = "-",             to = "N" },
 	--	{ from = "=",             to = "n" },
@@ -108,6 +118,15 @@ local nmappings = {
 
 vim.keymap.set("n", "q", "<nop>", { noremap = true })
 vim.keymap.set("n", ",q", "q", { noremap = true })
+
+vim.keymap.set('n', '<leader>c', function()
+	if vim.wo.colorcolumn == "" then
+		vim.wo.colorcolumn = "80"
+	else
+		vim.wo.colorcolumn = ""
+	end
+end, { silent = true })
+
 
 for _, mapping in ipairs(nmappings) do
 	vim.keymap.set(mapping.mode or "n", mapping.from, mapping.to, { noremap = true })

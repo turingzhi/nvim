@@ -29,8 +29,8 @@ M.config = {
 				builtin.grep_string({ search = "" })
 			end, m)
 			vim.keymap.set('n', '<leader>rs', builtin.resume, m)
-			vim.keymap.set('n', '<c-b>', builtin.buffers, m)
-			vim.keymap.set('n', '<c-h>', builtin.oldfiles, m)
+			-- vim.keymap.set('n', '<c-b>', builtin.buffers, m)
+			-- vim.keymap.set('n', '<c-o>', builtin.oldfiles, m)
 			vim.keymap.set('n', '<c-_>', builtin.current_buffer_fuzzy_find, m)
 			vim.keymap.set('n', 'z=', builtin.spell_suggest, m)
 
@@ -41,7 +41,7 @@ M.config = {
 			end, m)
 			-- vim.keymap.set('n', 'gd', builtin.lsp_definitions, m)
 			-- vim.keymap.set('n', '<c-t>', builtin.lsp_document_symbols, {})
-			vim.keymap.set('n', 'gi', builtin.git_status, m)
+			vim.keymap.set('n', 'gs', builtin.git_status, m)
 			vim.keymap.set("n", ":", builtin.commands, m)
 
 			local trouble = require("trouble.providers.telescope")
@@ -69,13 +69,13 @@ M.config = {
 					mappings = {
 						i = {
 							["<C-h>"] = "which_key",
-							["<C-k>"] = "move_selection_previous",
-							["<C-j>"] = "move_selection_next",
+							["<C-j>"] = require('telescope.actions').cycle_history_next,
+							["<C-k>"] = require('telescope.actions').cycle_history_prev,
+							["<C-p>"] = "move_selection_previous",
+							["<C-n>"] = "move_selection_next",
 							["<C-u>"] = "preview_scrolling_up",
 							["<C-d>"] = "preview_scrolling_down",
 							["<esc>"] = "close",
-							["<C-n>"] = require('telescope.actions').cycle_history_next,
-							["<C-p>"] = require('telescope.actions').cycle_history_prev,
 							-- ["<C-r>"] = require('telescope.builtin').command_history,
 						}
 					},
@@ -134,7 +134,7 @@ M.config = {
 				apple_simulator = true,
 			})
 			-- ts.load_extension("ui-select")
-			ts.load_extension("flutter")
+			-- ts.load_extension("flutter")
 			local tsdap = ts.extensions.dap;
 			-- vim.keymap.set("n", "<leader>'v", tsdap.variables, m)
 			-- vim.keymap.set("n", "<leader>'a", tsdap.commands, m)
@@ -151,7 +151,7 @@ M.config = {
 					enable = true,
 				},
 			})
-			vim.keymap.set('n', '<c-q>', require("commander").show, m)
+			vim.keymap.set('n', '<leader>f', require("commander").show, m)
 			commander.add({
 				{
 					desc = "Run Simulator",

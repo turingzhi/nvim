@@ -160,62 +160,101 @@ M.configfunc = function()
 			-- { name = "luasnip" },
 			-- { name = 'tmux',    option = { all_panes = true, } },  -- this is kinda slow
 		}),
+		-- mapping = cmp.mapping.preset.insert({
+		-- 	['<C-o>'] = cmp.mapping.complete(),
+		-- 	["<c-q>"] = cmp.mapping(
+		-- 		function()
+		-- 			cmp_ultisnips_mappings.compose { "expand", "jump_forwards" } (function() end)
+		-- 		end,
+		-- 		{ "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+		-- 	),
+		-- 	["<c-n>"] = cmp.mapping(
+		-- 		function(fallback)
+		-- 			cmp_ultisnips_mappings.jump_backwards(fallback)
+		-- 		end,
+		-- 		{ "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+		-- 	),
+		-- 	['<c-f>'] = cmp.mapping({
+		-- 		i = function(fallback)
+		-- 			cmp.close()
+		-- 			fallback()
+		-- 		end
+		-- 	}),
+		-- 	['<c-y>'] = cmp.mapping({ i = function(fallback) fallback() end }),
+		-- 	['<c-u>'] = cmp.mapping({ i = function(fallback) fallback() end }),
+		-- 	['<CR>'] = cmp.mapping({
+		-- 		i = function(fallback)
+		-- 			if cmp.visible() then
+		-- 				cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+		-- 			else
+		-- 				fallback()
+		-- 			end
+		-- 		end
+		-- 	}),
+		-- 	["<Tab>"] = cmp.mapping({
+		-- 		i = function(fallback)
+		-- 			if cmp.visible() then
+		-- 				cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+		-- 				moveCursorBeforeComma()
+		-- 			elseif has_words_before() then
+		-- 				cmp.complete()
+		-- 				moveCursorBeforeComma()
+		-- 			else
+		-- 				fallback()
+		-- 			end
+		-- 		end,
+		-- 	}),
+		-- 	["<S-Tab>"] = cmp.mapping({
+		-- 		i = function(fallback)
+		-- 			if cmp.visible() then
+		-- 				cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+		-- 				moveCursorBeforeComma()
+		-- 			else
+		-- 				fallback()
+		-- 			end
+		-- 		end,
+		-- 	}),
+		-- }),
+		--preselect = cmp.PreselectMode.Item
+
 		mapping = cmp.mapping.preset.insert({
+			-- Trigger completion menu
 			['<C-o>'] = cmp.mapping.complete(),
-			["<c-e>"] = cmp.mapping(
-				function()
-					cmp_ultisnips_mappings.compose { "expand", "jump_forwards" } (function() end)
-				end,
-				{ "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
-			),
-			["<c-n>"] = cmp.mapping(
-				function(fallback)
-					cmp_ultisnips_mappings.jump_backwards(fallback)
-				end,
-				{ "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
-			),
-			['<c-f>'] = cmp.mapping({
-				i = function(fallback)
-					cmp.close()
+
+			-- Navigate completion menu
+			['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+			['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+
+			-- Close completion menu
+			['<C-q>'] = cmp.mapping.abort(),
+
+			-- Confirm selection (only if explicitly selected)
+			['<CR>'] = cmp.mapping.confirm({ select = false }),
+
+			-- Snippets
+			['<Tab>'] = cmp.mapping(function(fallback)
+				if cmp.visible() then
+					cmp.select_next_item()
+				elseif vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
+					return vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>(ultisnips_expand)", true, true, true), "")
+				elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+					return vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>(ultisnips_jump_forward)", true, true, true), "")
+				else
 					fallback()
 				end
-			}),
-			['<c-y>'] = cmp.mapping({ i = function(fallback) fallback() end }),
-			['<c-u>'] = cmp.mapping({ i = function(fallback) fallback() end }),
-			['<CR>'] = cmp.mapping({
-				i = function(fallback)
-					if cmp.visible() then
-						cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-					else
-						fallback()
-					end
+			end, { "i", "s" }),
+
+			['<S-Tab>'] = cmp.mapping(function(fallback)
+				if cmp.visible() then
+					cmp.select_prev_item()
+				elseif vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
+					return vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>(ultisnips_jump_backward)", true, true, true), "")
+				else
+					fallback()
 				end
-			}),
-			["<Tab>"] = cmp.mapping({
-				i = function(fallback)
-					if cmp.visible() then
-						cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-						moveCursorBeforeComma()
-					elseif has_words_before() then
-						cmp.complete()
-						moveCursorBeforeComma()
-					else
-						fallback()
-					end
-				end,
-			}),
-			["<S-Tab>"] = cmp.mapping({
-				i = function(fallback)
-					if cmp.visible() then
-						cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
-						moveCursorBeforeComma()
-					else
-						fallback()
-					end
-				end,
-			}),
-		}),
-		--preselect = cmp.PreselectMode.Item
+			end, { "i", "s" }),
+		})
+
 	})
 end
 

@@ -30,8 +30,18 @@ return {
 				toc = {}                   -- Table of Contents options
 			}
 		end,
-		ft = { "markdown" },
+
 		config = function()
-		end
+			vim.cmd(
+				[[
+					function OpenMarkdownPreview (url)
+					 execute "silent ! open -na Safari " . a:url
+					endfunction
+					]]
+			)
+			vim.g.mkdp_browserfunc = 'OpenMarkdownPreview'
+		end,
+		ft = { "markdown" },
 	},
+
 }

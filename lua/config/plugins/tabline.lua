@@ -4,8 +4,17 @@ return {
 	opts = {
 		options = {
 			mode = "buffers",
-			number = "ordinal",
+			numbers = "none",
 			diagnostics = "nvim_lsp",
+			right_mouse_command = "bdelete %",
+			close_command = "bdelete! %d",    -- can be a string | function, | false see "Mouse actions"
+			right_mouse_command = "bdelete! %d", -- can be a string | function | false, see "Mouse actions"
+			left_mouse_command = "buffer %d", -- can be a string | function, | false see "Mouse actions"
+			middle_mouse_command = nil,       -- can be a string | function, | false see "Mouse actions"
+			lose_command = "bdelete! %d",     -- can be a string | function, | false see "Mouse actions"
+			right_mouse_command = "bdelete! %d", -- can be a string | function | false, see "Mouse actions"
+			left_mouse_command = "buffer %d", -- can be a string | function, | false see "Mouse actions"
+			middle_mouse_command = nil,       -- can be a string | function, | false see "Mouse actions"
 			diagnostics_indicator = function(count, level, diagnostics_dict, context)
 				local icon = level:match("error") and " " or " "
 				return " " .. icon .. count
@@ -15,9 +24,10 @@ return {
 				-- style = 'icon' | 'underline' | 'none',
 				style = "icon",
 			},
-			show_buffer_close_icons = false,
-			show_close_icon = false,
-			enforce_regular_tabs = true,
+			show_buffer_close_icons = true,
+			show_close_icon = true,
+			modified_icon = "●",
+			enforce_regular_tabs = false,
 			show_duplicate_prefix = false,
 			tab_size = 16,
 			padding = 0,

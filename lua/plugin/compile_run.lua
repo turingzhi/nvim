@@ -29,7 +29,7 @@ local compileRun = function()
 		split()
 		vim.cmd("term python3 %")
 	elseif ft == 'html' then
-		vim.cmd(":!open -a Safari %")
+		vim.cmd(":!open -na Safari %")
 	end
 end
 

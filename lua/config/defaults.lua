@@ -38,12 +38,21 @@ vim.o.inccommand = 'split'
 vim.o.completeopt = 'longest,noinsert,menuone,noselect,preview'
 vim.o.completeopt = 'menuone,noinsert,noselect,preview'
 vim.opt.path:append("**")
+vim.opt.mouse = "a"
+
 
 -- vim.o.lazyredraw = true
 vim.o.visualbell = true
-vim.o.colorcolumn = '100'
+-- vim.o.colorcolumn = '100'
 vim.o.updatetime = 100
 vim.o.virtualedit = 'block'
+
+-- disable netrw at the very start of your init.lua
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
+
+-- optionally enable 24-bit colour
+-- vim.opt.termguicolors = true
 
 vim.cmd([[
 silent !mkdir -p $HOME/.config/nvim/tmp/backup
@@ -67,6 +76,15 @@ vim.api.nvim_create_autocmd("BufEnter", { pattern = "*", command = "silent! lcd 
 
 
 vim.cmd([[au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]])
+-- vim.cmd(
+-- 	[[
+-- function! OpenMarkdownPreview (url)
+--   silent execute '!open -na Safari ' . shellescape(a:url)
+-- endfunction
+-- ]]
+-- )
+--
+-- vim.g.mkdp_browserfunc = 'OpenMarkdownPreview'
 
 
 vim.g.terminal_color_0  = '#000000'
